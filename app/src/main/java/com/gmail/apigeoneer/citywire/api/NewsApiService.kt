@@ -36,7 +36,5 @@ val retrofit = Retrofit.Builder()
     .build()
 
 object NewsService {
-    val newsApiService: NewsApiService by lazy {
-        retrofit.create(NewsApiService::class.java)
-    }
+    val newsApiService: NewsApiService by lazy { retrofit.create(NewsApiService::class.java) }
 }
