@@ -26,7 +26,7 @@ interface NewsApiService {
         @Query("to") to: String,
         @Query("sortBy") sortBy: String,
         @Query("apiKey") apiKey: String
-    ) : Call<Article>
+    ) : Call<String>
 
 }
 
