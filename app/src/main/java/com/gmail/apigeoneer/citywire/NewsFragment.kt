@@ -44,23 +44,13 @@ class NewsFragment : Fragment() {
         Log.d(TAG, "::::::: _viewModel.articles.value : $articles :::::::")
         _adapter = NewsAdapter(articles)
 
-//        if (articles == null) {
-//            articles = listOf(Article(Source("", ""), "", "", "", "", "", "", ""))
-//        }
-
-        setupUI()
-
-        return binding.root
-    }
-
-    private fun setupUI() {
         binding.newsRecyclerView.layoutManager = linearLayoutManager
         binding.newsRecyclerView.setHasFixedSize(true)
         binding.newsRecyclerView.adapter=_adapter
         _adapter.notifyDataSetChanged()
 
+        return binding.root
     }
-
 
     companion object {
         private const val TAG="NewsFragment"
