@@ -28,12 +28,6 @@ interface NewsApiService {
 //        @Query("apiKey") apiKey: String
     ) : Call<News>
 
-//    fun getNews(
-//        @Query("q") query: String,
-//        @Query("domains") domains: String,
-//        @Query("apiKey") apiKey: String
-//    ) : Call<News>
-
 }
 
 val retrofit: Retrofit = Retrofit.Builder()
