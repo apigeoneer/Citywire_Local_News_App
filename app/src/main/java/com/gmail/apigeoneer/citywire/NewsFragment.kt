@@ -5,15 +5,31 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.viewModels
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
+import com.gmail.apigeoneer.citywire.databinding.FragmentNewsBinding
+import com.gmail.apigeoneer.citywire.viewmodels.NewsViewModel
 
 class NewsFragment : Fragment() {
+
+    private lateinit var binding: FragmentNewsBinding
+
+    private val _viewModel by viewModels<NewsViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_news, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_news, container, false)
+
+        // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
+        binding.lifecycleOwner = this
+
+        binding.newsViewModel = _viewModel
+
+        return binding.root
     }
 
 }

@@ -17,15 +17,10 @@ import retrofit2.Response
 class NewsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityNewsBinding
-    private val _viewModel by viewModels<NewsViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_news)
-
-        binding
-
-        _viewModel.getNewsArticles()
 
     }
 

@@ -1,7 +1,8 @@
 package com.gmail.apigeoneer.citywire.data.models
 
+
 data class Article(
-    val source: List<Source>,
+    val source: Source,
     val author: String,
     val title: String,
     val description: String,

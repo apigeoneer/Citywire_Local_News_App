@@ -1,12 +1,15 @@
 package com.gmail.apigeoneer.citywire.api
 
 import com.gmail.apigeoneer.citywire.data.models.Article
+import com.gmail.apigeoneer.citywire.data.models.News
 import com.gmail.apigeoneer.citywire.utilities.BASE_URL
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
+
+private const val KEY = "a1165ec873794ad6a7711b399b973356"
 
 interface NewsApiService {
     /**
@@ -19,18 +22,21 @@ interface NewsApiService {
      * apiKey=API_KEY
      */
 
-    @GET("v2/everything?")
+    @GET("everything?apiKey=$KEY")
     fun getNews(
-        @Query("q") query: String,
-        @Query("from") from: String,
-        @Query("to") to: String,
-        @Query("sortBy") sortBy: String,
-        @Query("apiKey") apiKey: String
-    ) : Call<String>
+        @Query("q") q: String,
+//        @Query("apiKey") apiKey: String
+    ) : Call<News>
+
+//    fun getNews(
+//        @Query("q") query: String,
+//        @Query("domains") domains: String,
+//        @Query("apiKey") apiKey: String
+//    ) : Call<News>
 
 }
 
-val retrofit = Retrofit.Builder()
+val retrofit: Retrofit = Retrofit.Builder()
     .baseUrl(BASE_URL)
     .addConverterFactory(GsonConverterFactory.create())
     .build()
