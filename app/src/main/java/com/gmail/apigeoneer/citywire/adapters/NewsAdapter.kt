@@ -27,6 +27,7 @@ class NewsAdapter(
         : RecyclerView.ViewHolder(binding.root) {
         fun bind(article: Article) {
             binding.article = article
+            binding.executePendingBindings()
         }
     }
 }

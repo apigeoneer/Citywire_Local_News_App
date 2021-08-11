@@ -25,7 +25,6 @@ class NewsViewModel: ViewModel() {
         getNewsArticles()
     }
 
-
     private fun getNewsArticles() {
 //        _response.value = "Set the News API Response here."
 
@@ -38,7 +37,11 @@ class NewsViewModel: ViewModel() {
             override fun onResponse(call: Call<News>, response: Response<News>) {
                 val responseData: News?= response.body()
                 _articles.value = responseData?.articles
+                if (_articles.value == null) {
+                    Log.d(TAG, "api response null")
+                }
                 Log.d(TAG, "::::::: Api Response: ${response.body()?.status} :::::::")
+                Log.d(TAG, "::::::: Api Response: ${_articles.value} :::::::")
             }
 
             override fun onFailure(call: Call<News>, t: Throwable) {
