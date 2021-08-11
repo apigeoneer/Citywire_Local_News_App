@@ -16,10 +16,10 @@ import retrofit2.Response
 
 class NewsViewModel: ViewModel() {
 
-    private var _response = MutableLiveData<News>()
+    private var _articles = MutableLiveData<List<Article>>()
 
-    val response: LiveData<News>
-        get() = _response
+    val articles: LiveData<List<Article>>
+        get() = _articles
 
     init {
         getNewsArticles()
@@ -36,8 +36,8 @@ class NewsViewModel: ViewModel() {
 
         news.enqueue(object: Callback<News> {
             override fun onResponse(call: Call<News>, response: Response<News>) {
-                _response.value = response.body()
-//                Toast.makeText(context, "${_response.value}", Toast.LENGTH_LONG).show()
+                val responseData: News?= response.body()
+                _articles.value = responseData?.articles
                 Log.d(TAG, "::::::: Api Response: ${response.body()?.status} :::::::")
             }
 
