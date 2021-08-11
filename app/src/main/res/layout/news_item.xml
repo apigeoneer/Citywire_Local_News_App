@@ -45,6 +45,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{article.title}"
+                    android:textStyle="bold"
                     tools:text="Fish fall from the sky" />
 
                 <TextView

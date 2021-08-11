@@ -18,7 +18,6 @@ class NewsFragment : Fragment() {
     private lateinit var binding: FragmentNewsBinding
 
     private val _viewModel by viewModels<NewsViewModel>()
-
     private val _adapter=NewsAdapter(_viewModel.articles.value!!)
 
     override fun onCreateView(
