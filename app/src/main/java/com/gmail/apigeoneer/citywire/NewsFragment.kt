@@ -55,7 +55,7 @@ class NewsFragment : Fragment() {
     }
 
     private fun navigateToArticleDetail() {
-        _viewModel.navigationArticle.observe(viewLifecycleOwner, Observer { article ->
+        _viewModel.navigateToArticle.observe(viewLifecycleOwner, Observer { article ->
             if (article != null) {
                 this.findNavController().navigate(R.id.action_newsFragment_to_newsDetailFragment)
             }

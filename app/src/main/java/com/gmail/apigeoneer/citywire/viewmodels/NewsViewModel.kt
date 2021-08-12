@@ -1,12 +1,9 @@
 package com.gmail.apigeoneer.citywire.viewmodels
 
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.gmail.apigeoneer.citywire.NewsActivity
-import com.gmail.apigeoneer.citywire.R
 import com.gmail.apigeoneer.citywire.api.NewsService
 import com.gmail.apigeoneer.citywire.data.models.Article
 import com.gmail.apigeoneer.citywire.data.models.News
@@ -20,9 +17,9 @@ class NewsViewModel : ViewModel() {
     val articles: LiveData<List<Article>>
         get()=_articles
 
-    private var _navigationArticle=MutableLiveData<Article>()
-    val navigationArticle: LiveData<Article>
-        get()=_navigationArticle
+    private var _navigateToArticle=MutableLiveData<Article>()
+    val navigateToArticle: LiveData<Article>
+        get()=_navigateToArticle
 
     init {
         getNewsArticles()
@@ -54,7 +51,7 @@ class NewsViewModel : ViewModel() {
     }
 
     fun navigateToDetails(article: Article) {
-        _navigationArticle.value=article
+        _navigateToArticle.value=article
     }
 
     companion object {
