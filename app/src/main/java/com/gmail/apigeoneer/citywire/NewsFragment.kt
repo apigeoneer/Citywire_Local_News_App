@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gmail.apigeoneer.citywire.adapters.NewsAdapter
 import com.gmail.apigeoneer.citywire.data.models.Article
@@ -44,18 +45,36 @@ class NewsFragment : Fragment() {
         binding.newsRecyclerView.layoutManager = linearLayoutManager
         binding.newsRecyclerView.setHasFixedSize(true)
 
+        // Observe API's articles response is fetched & set the recycler view
+        setupUI()
+
+        // Observe which news item the user clicks on & navigate to its detail screen
+        navigateToArticleDetail()
+
+        return binding.root
+    }
+
+    private fun navigateToArticleDetail() {
+        _viewModel.navigationArticle.observe(viewLifecycleOwner, Observer { article ->
+            if (article != null) {
+                this.findNavController().navigate(R.id.action_newsFragment_to_newsDetailFragment)
+            }
+        })
+    }
+
+    private fun setupUI() {
         _viewModel.articles.observe(viewLifecycleOwner, Observer { articles ->
             if (articles != null) {
                 // Set the RecyclerView here
                 articleList=_viewModel.articles.value!!
 
-                _adapter = NewsAdapter(articleList)
+                _adapter = NewsAdapter(articleList, NewsAdapter.OnClickListener {
+                    _viewModel.navigateToDetails(it)
+                })
                 binding.newsRecyclerView.adapter=_adapter
                 _adapter.notifyDataSetChanged()
             }
         })
-
-        return binding.root
     }
 
     companion object {
