@@ -22,10 +22,10 @@ class NewsDetailFragment : Fragment() {
         // Inflate the layout for this fragment
         binding=DataBindingUtil.inflate(inflater, R.layout.fragment_news_detail, container, false)
 
-        val selectedArticle=NewsDetailFragmentArgs.fromBundle(requireArguments()).selectedArticle
+        val article=NewsDetailFragmentArgs.fromBundle(requireArguments()).selectedArticle
 
         val _viewModel: NewsDetailViewModel by viewModels {
-            NewsDetailViewModelFactory(selectedArticle, requireNotNull(activity?.application))
+            NewsDetailViewModelFactory(article, requireNotNull(activity?.application))
         }
 
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
