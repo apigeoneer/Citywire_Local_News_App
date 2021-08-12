@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import com.gmail.apigeoneer.citywire.R
 import com.gmail.apigeoneer.citywire.databinding.FragmentNewsDetailBinding
 import com.gmail.apigeoneer.citywire.viewmodels.NewsDetailViewModel
@@ -26,9 +27,17 @@ class NewsDetailFragment : Fragment() {
 
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
         binding.lifecycleOwner=this
+        binding.newsDetailViewModel = _viewModel
 
+        binding.backImageView.setOnClickListener {
+//            it.findNavController().navigate(R.id.action_newsDetailFragment_to_newsFragment)
+
+            // Navigate up
+            requireActivity().onBackPressed()
+        }
 
         return binding.root
     }
+
 
 }

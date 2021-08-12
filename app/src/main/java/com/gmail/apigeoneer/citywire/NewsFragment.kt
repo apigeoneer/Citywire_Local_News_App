@@ -67,6 +67,7 @@ class NewsFragment : Fragment() {
             if (articles != null) {
                 // Set the RecyclerView here
                 articleList=_viewModel.articles.value!!
+                Log.d(TAG, "::::::: _viewModel.articles.value : $articleList :::::::")
 
                 _adapter = NewsAdapter(articleList, NewsAdapter.OnClickListener {
                     _viewModel.navigateToDetails(it)
