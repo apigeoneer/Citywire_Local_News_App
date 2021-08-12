@@ -27,6 +27,7 @@ class NewsDetailFragment : Fragment() {
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
         binding.lifecycleOwner=this
 
+
         return binding.root
     }
 

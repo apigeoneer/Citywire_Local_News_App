@@ -2,6 +2,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="newsDetailViewModel"
+            type="com.gmail.apigeoneer.citywire.viewmodels.NewsDetailViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -35,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/crimson_text"
-            android:text="TextView"
+            android:text="@{newsDetailViewModel.selectedArticle.title}"
             android:textColor="#323232"
             android:textSize="26sp"
             android:textStyle="bold|italic"
@@ -55,7 +61,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="TextView"
+            android:text="@{newsDetailViewModel.selectedArticle.author}"
             android:textColor="#676767"
             app:layout_constraintEnd_toStartOf="@+id/guideline_end"
             app:layout_constraintStart_toStartOf="@+id/guideline_start"
@@ -66,7 +72,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:text="TextView"
+            android:text="@{newsDetailViewModel.selectedArticle.publishedAt}"
             android:textColor="#676767"
             app:layout_constraintEnd_toStartOf="@+id/guideline_end"
             app:layout_constraintStart_toStartOf="@+id/guideline_start"
@@ -77,7 +83,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="TextView"
+            android:text="@{newsDetailViewModel.selectedArticle.description}"
             android:textColor="#676767"
             android:textStyle="italic"
             app:layout_constraintEnd_toStartOf="@+id/guideline_end"
@@ -92,11 +98,11 @@
             app:layout_constraintGuide_end="20dp" />
 
         <TextView
-            android:id="@+id/articletext_text_view"
+            android:id="@+id/content_text_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="TextView"
+            android:text="@{newsDetailViewModel.selectedArticle.content}"
             app:layout_constraintEnd_toStartOf="@+id/guideline_end"
             app:layout_constraintStart_toStartOf="@+id/guideline_start"
             app:layout_constraintTop_toBottomOf="@+id/description_text_view" />
