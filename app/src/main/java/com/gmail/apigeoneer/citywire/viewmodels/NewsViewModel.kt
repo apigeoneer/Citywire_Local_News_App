@@ -17,9 +17,10 @@ class NewsViewModel : ViewModel() {
     val articles: LiveData<List<Article>>
         get()=_articles
 
-    private var _navigateToArticle=MutableLiveData<Article>()
-    val navigateToArticle: LiveData<Article>
+    private var _navigateToArticle=MutableLiveData<Article?>()
+    val navigateToArticle: LiveData<Article?>
         get()=_navigateToArticle
+
 
     init {
         getNewsArticles()
@@ -52,6 +53,10 @@ class NewsViewModel : ViewModel() {
 
     fun navigateToDetails(article: Article) {
         _navigateToArticle.value=article
+    }
+
+    fun displayArticleDetailsComplete() {
+        _navigateToArticle.value=null
     }
 
     companion object {
