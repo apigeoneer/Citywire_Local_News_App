@@ -23,10 +23,10 @@ interface NewsApiService {
      */
 
     @GET("everything?apiKey=$KEY")
-    fun getNews(
+    suspend fun getNews(
         @Query("q") q: String,
 //        @Query("apiKey") apiKey: String
-    ) : Call<News>
+    ): News
 
 }
 
