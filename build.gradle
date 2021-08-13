@@ -5,6 +5,7 @@ buildscript {
         navigation_version = "2.3.5"
         retrofit_version = "2.9.0"
         glide_version ="4.10.0"
+        version_room = "2.3.0"
     }
     repositories {
         google()
