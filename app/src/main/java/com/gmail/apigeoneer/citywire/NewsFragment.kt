@@ -25,7 +25,7 @@ class NewsFragment : Fragment() {
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var _adapter: NewsAdapter
 
-    var articleList: List<Article> = listOf(Article(Source("", ""), "", "", "", "", "", "", ""))
+    var articleList: List<Article> = listOf(Article(0, Source("", ""), "", "", "", "", "", "", ""))
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
