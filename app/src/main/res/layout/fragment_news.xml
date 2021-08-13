@@ -16,7 +16,6 @@
         android:orientation="vertical"
         android:background="@color/white">
 
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/news_recycler_view"
             android:layout_width="match_parent"
