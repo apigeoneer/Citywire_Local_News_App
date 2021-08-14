@@ -4,9 +4,11 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.gmail.apigeoneer.citywire.api.NewsService
 import com.gmail.apigeoneer.citywire.data.models.Article
 import com.gmail.apigeoneer.citywire.data.models.News
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -29,26 +31,47 @@ class NewsViewModel : ViewModel() {
     private fun getNewsArticles() {
 //        _response.value = "Set the News API Response here."
 
-        // call the http query fun in the api interface using the singleton
-        // https://newsapi.org/v2/everything?q=tesla&from=2021-07-10&sortBy=publishedAt&apiKey=API_KEY
-        val news=NewsService.newsApiService.getNews("gorakhpur")     // , R.string.API_KEY.toString()
+        /**
+         * Fetching data from the internet using Retrofit
+         */
+//        // call the http query fun in the api interface using the singleton
+//        // https://newsapi.org/v2/everything?q=tesla&from=2021-07-10&sortBy=publishedAt&apiKey=API_KEY
+//        val news=NewsService.newsApiService.getNews("gorakhpur")     // , R.string.API_KEY.toString()
+//
+//
+//        news.enqueue(object : Callback<News> {
+//            override fun onResponse(call: Call<News>, response: Response<News>) {
+//                val responseData: News?=response.body()
+//                _articles.value=responseData?.articles
+//                if (_articles.value == null) {
+//                    Log.d(TAG, "api response null")
+//                }
+//                Log.d(TAG, "::::::: Api Response: ${response.body()?.status} :::::::")
+//                Log.d(TAG, "::::::: Api Response: ${_articles.value} :::::::")
+//            }
+//
+//            override fun onFailure(call: Call<News>, t: Throwable) {
+//                Log.d(TAG, "::::::: No Api Response: ${t.message} :::::::")
+//            }
+//        })
 
+        /**
+         *  Fetching data from the internet using Retrofit via coroutines
+         */
+        viewModelScope.launch {
+            val news=NewsService.newsApiService.getNews("gorakhpur")     // , R.string.API_KEY.toString()
 
-        news.enqueue(object : Callback<News> {
-            override fun onResponse(call: Call<News>, response: Response<News>) {
-                val responseData: News?=response.body()
-                _articles.value=responseData?.articles
+            try {
+                _articles.value=news.articles
                 if (_articles.value == null) {
                     Log.d(TAG, "api response null")
                 }
-                Log.d(TAG, "::::::: Api Response: ${response.body()?.status} :::::::")
                 Log.d(TAG, "::::::: Api Response: ${_articles.value} :::::::")
-            }
 
-            override fun onFailure(call: Call<News>, t: Throwable) {
-                Log.d(TAG, "::::::: No Api Response: ${t.message} :::::::")
+            } catch (e: Exception) {
+                Log.d(TAG, "::::::: No Api Response: ${e.message} :::::::")
             }
-        })
+        }
     }
 
     fun navigateToDetails(article: Article) {
