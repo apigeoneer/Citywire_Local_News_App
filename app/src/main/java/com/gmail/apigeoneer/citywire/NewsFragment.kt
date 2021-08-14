@@ -13,19 +13,18 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gmail.apigeoneer.citywire.adapters.NewsAdapter
 import com.gmail.apigeoneer.citywire.data.models.Article
-import com.gmail.apigeoneer.citywire.data.models.Source
 import com.gmail.apigeoneer.citywire.databinding.FragmentNewsBinding
 import com.gmail.apigeoneer.citywire.viewmodels.NewsViewModel
+import com.gmail.apigeoneer.citywire.viewmodels.NewsViewModelFactory
 
 class NewsFragment : Fragment() {
 
     private lateinit var binding: FragmentNewsBinding
 
-    private val _viewModel by viewModels<NewsViewModel>()
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var _adapter: NewsAdapter
 
-    var articleList: List<Article> = listOf(Article(Source("", ""), "", "", "", "", "", "", ""))
+    private var articleList: List<Article> = listOf(Article("", "", "", "", "", "", ""))
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +32,10 @@ class NewsFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         binding=DataBindingUtil.inflate(inflater, R.layout.fragment_news, container,false)
+
+        val _viewModel: NewsViewModel by viewModels {
+            NewsViewModelFactory(requireNotNull(activity?.application))
+        }
 
         linearLayoutManager = LinearLayoutManager(context)
 
@@ -46,33 +49,33 @@ class NewsFragment : Fragment() {
         binding.newsRecyclerView.setHasFixedSize(true)
 
         // Observe API's articles response is fetched & set the recycler view
-        setupUI()
+        setupUI(_viewModel)
 
         // Observe which news item the user clicks on & navigate to its detail screen
-        navigateToArticleDetail()
+        navigateToArticleDetail(_viewModel)
 
         return binding.root
     }
 
-    private fun navigateToArticleDetail() {
-        _viewModel.navigateToArticle.observe(viewLifecycleOwner, Observer { article ->
+    private fun navigateToArticleDetail(viewModel: NewsViewModel) {
+        viewModel.navigateToArticle.observe(viewLifecycleOwner, Observer { article ->
             if (article != null) {
                 this.findNavController().navigate(
                     NewsFragmentDirections.actionNewsFragmentToNewsDetailFragment(article))
-                _viewModel.displayArticleDetailsComplete()
+                viewModel.displayArticleDetailsComplete()
             }
         })
     }
 
-    private fun setupUI() {
-        _viewModel.articles.observe(viewLifecycleOwner, Observer { articles ->
+    private fun setupUI(viewModel: NewsViewModel) {
+        viewModel.repository.articles.observe(viewLifecycleOwner, Observer { articles ->
             if (articles != null) {
                 // Set the RecyclerView here
-                articleList=_viewModel.articles.value!!
+                articleList=viewModel.repository.articles.value!!
                 Log.d(TAG, "::::::: _viewModel.articles.value : $articleList :::::::")
 
                 _adapter = NewsAdapter(articleList, NewsAdapter.OnClickListener {
-                    _viewModel.navigateToDetails(it)
+                    viewModel.navigateToDetails(it)
                 })
                 binding.newsRecyclerView.adapter=_adapter
                 _adapter.notifyDataSetChanged()

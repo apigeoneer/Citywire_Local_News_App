@@ -1,13 +1,15 @@
-package com.gmail.apigeoneer.citywire.data.models
+package com.gmail.apigeoneer.citywire.data.entity
 
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 
+@Entity(tableName = "articles")
 @Parcelize
-data class Article(
+data class ArticleEntity constructor(
     val author: String? = "",
+    @PrimaryKey()
     val title: String = "",
     val description: String = "",
     val url: String = "",
