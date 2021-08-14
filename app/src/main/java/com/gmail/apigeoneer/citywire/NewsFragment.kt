@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gmail.apigeoneer.citywire.adapters.NewsAdapter
 import com.gmail.apigeoneer.citywire.data.models.Article
@@ -23,7 +25,7 @@ class NewsFragment : Fragment() {
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var _adapter: NewsAdapter
 
-    var articles: List<Article> = listOf(Article(Source("", ""), "", "", "", "", "", "", ""))
+    var articleList: List<Article> = listOf(Article(Source("", ""), "", "", "", "", "", "", ""))
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,18 +40,44 @@ class NewsFragment : Fragment() {
         binding.lifecycleOwner=this
         binding.newsViewModel=_viewModel
 
-        if (articles != null) {
-            articles=_viewModel.articles.value!!
-        }
-        Log.d(TAG, "::::::: _viewModel.articles.value : $articles :::::::")
-        _adapter = NewsAdapter(articles)
+        Log.d(TAG, "::::::: _viewModel.articles.value : $articleList :::::::")
 
         binding.newsRecyclerView.layoutManager = linearLayoutManager
         binding.newsRecyclerView.setHasFixedSize(true)
-        binding.newsRecyclerView.adapter=_adapter
-        _adapter.notifyDataSetChanged()
+
+        // Observe API's articles response is fetched & set the recycler view
+        setupUI()
+
+        // Observe which news item the user clicks on & navigate to its detail screen
+        navigateToArticleDetail()
 
         return binding.root
+    }
+
+    private fun navigateToArticleDetail() {
+        _viewModel.navigateToArticle.observe(viewLifecycleOwner, Observer { article ->
+            if (article != null) {
+                this.findNavController().navigate(
+                    NewsFragmentDirections.actionNewsFragmentToNewsDetailFragment(article))
+                _viewModel.displayArticleDetailsComplete()
+            }
+        })
+    }
+
+    private fun setupUI() {
+        _viewModel.articles.observe(viewLifecycleOwner, Observer { articles ->
+            if (articles != null) {
+                // Set the RecyclerView here
+                articleList=_viewModel.articles.value!!
+                Log.d(TAG, "::::::: _viewModel.articles.value : $articleList :::::::")
+
+                _adapter = NewsAdapter(articleList, NewsAdapter.OnClickListener {
+                    _viewModel.navigateToDetails(it)
+                })
+                binding.newsRecyclerView.adapter=_adapter
+                _adapter.notifyDataSetChanged()
+            }
+        })
     }
 
     companion object {
