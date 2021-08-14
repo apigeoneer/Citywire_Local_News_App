@@ -23,7 +23,7 @@ interface NewsApiService {
      * apiKey=API_KEY
      */
 
-    @GET("everything?apiKey=$KEY")
+    @GET("everything?apiKey=$KEY")  
     suspend fun getNewsAsync(
         @Query("q") q: String,
 //        @Query("apiKey") apiKey: String
