@@ -5,13 +5,14 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.gmail.apigeoneer.citywire.data.entity.ArticleEntity
 import com.gmail.apigeoneer.citywire.data.models.Article
 
 @Dao
 interface NewsDao {
     @Query("SELECT * FROM articles")
-    fun getArticles(): LiveData<List<Article>>
+    fun getArticles(): LiveData<List<ArticleEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(vararg articles: Article)
+    fun insertAll(vararg articles: ArticleEntity)
 }

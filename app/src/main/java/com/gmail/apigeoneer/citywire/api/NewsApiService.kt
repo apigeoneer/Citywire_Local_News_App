@@ -3,6 +3,7 @@ package com.gmail.apigeoneer.citywire.api
 import com.gmail.apigeoneer.citywire.data.models.Article
 import com.gmail.apigeoneer.citywire.data.models.News
 import com.gmail.apigeoneer.citywire.utilities.BASE_URL
+import kotlinx.coroutines.Deferred
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -23,7 +24,7 @@ interface NewsApiService {
      */
 
     @GET("everything?apiKey=$KEY")
-    suspend fun getNews(
+    suspend fun getNewsAsync(
         @Query("q") q: String,
 //        @Query("apiKey") apiKey: String
     ) : News
