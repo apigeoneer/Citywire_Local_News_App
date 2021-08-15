@@ -10,17 +10,17 @@
         motion:autoTransition="animateToEnd">
        <KeyFrameSet>
            <KeyAttribute
-               motion:motionTarget="@+id/imageView"
+               motion:motionTarget="@+id/splash_image_view"
                motion:framePosition="20"
                android:scaleX="0.7"
                android:scaleY="0.7" />
            <KeyAttribute
-               motion:motionTarget="@+id/imageView"
+               motion:motionTarget="@+id/splash_image_view"
                motion:framePosition="50"
                android:scaleX="0.7"
                android:scaleY="0.7" />
            <KeyAttribute
-               motion:motionTarget="@+id/imageView"
+               motion:motionTarget="@+id/splash_image_view"
                motion:framePosition="100"
                android:scaleX="50"
                android:scaleY="50" />

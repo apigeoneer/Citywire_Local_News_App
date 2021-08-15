@@ -5,4 +5,7 @@
     <string name="news_notification_channel_id">news_download_channel_id</string>
     <string name="news_notification_channel_name">News Download Channel</string>
     <string name="news_reminder">Check out todays news.</string>
+    <string name="app_logo">App logo</string>
+    <string name="article_image">Article image</string>
+    <string name="back_button_image">Back button image</string>
 </resources>

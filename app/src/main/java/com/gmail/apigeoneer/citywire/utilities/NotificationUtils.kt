@@ -27,7 +27,7 @@ fun NotificationManager.sendNotification(
 
     val loadImage = BitmapFactory.decodeResource(
         applicationContext.resources,
-        R.drawable.news
+        R.drawable.app_logo
     )
 
     val bigPicStyle = NotificationCompat.BigPictureStyle()
@@ -41,7 +41,7 @@ fun NotificationManager.sendNotification(
     )
         .setPriority(NotificationCompat.PRIORITY_HIGH)
 
-        .setSmallIcon(R.drawable.news)
+        .setSmallIcon(R.drawable.app_logo)
         .setContentTitle(applicationContext
             .getString(R.string.notification_title))
         .setContentText(messageBody)
