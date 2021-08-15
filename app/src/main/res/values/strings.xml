@@ -1,5 +1,8 @@
 <resources>
-    <string name="app_name">Citywire</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name">India News</string>
+    <string name="download_channel_id">News Download</string>
+    <string name="notification_title">Did you check out the news today?</string>
+    <string name="news_notification_channel_id">news_download_channel_id</string>
+    <string name="news_notification_channel_name">News Download Channel</string>
+    <string name="news_reminder">Check out todays news.</string>
 </resources>

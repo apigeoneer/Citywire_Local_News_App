@@ -13,16 +13,10 @@ private const val NOTIFICATION_ID = 0
 
 fun NotificationManager.sendNotification(
     messageBody: String,
-    applicationContext: Context,
-    status: String
+    applicationContext: Context
 ) {
     // Since building the notification uses the pending intent, the intents come first
     val contentIntent = Intent(applicationContext, NewsActivity::class.java)
-    // passing values to the Detail Fragment
-    contentIntent.apply {
-        putExtra("repoSelected", messageBody)
-        putExtra("status", status)
-    }
 
     val contentPendingIntent =  PendingIntent.getActivity(
         applicationContext,
