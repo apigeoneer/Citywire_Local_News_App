@@ -1,13 +1,25 @@
 package com.gmail.apigeoneer.citywire.viewmodels
 
+import android.app.AlarmManager
 import android.app.Application
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.ComponentName
+import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Build
+import android.os.SystemClock
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.*
 import com.gmail.apigeoneer.citywire.data.db.getDatabase
 import com.gmail.apigeoneer.citywire.data.models.Article
 import com.gmail.apigeoneer.citywire.data.repository.NewsRepository
+import com.gmail.apigeoneer.citywire.utilities.NewsBroadcastReceiver
+import com.gmail.apigeoneer.citywire.utilities.sendNotification
 import kotlinx.coroutines.launch
+
 
 @RequiresApi(Build.VERSION_CODES.O)
 class NewsViewModel(private val app: Application) : ViewModel() {
@@ -30,6 +42,7 @@ class NewsViewModel(private val app: Application) : ViewModel() {
             repository.refreshArticles()
         }
     }
+
 
 //    private fun getNewsArticles() {
 ////        _response.value = "Set the News API Response here."
@@ -94,6 +107,8 @@ class NewsViewModel(private val app: Application) : ViewModel() {
 class NewsViewModelFactory(
     private val app: Application
 ) : ViewModelProvider.Factory {
+
+    @RequiresApi(Build.VERSION_CODES.O)
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(NewsViewModel::class.java)) {
