@@ -12,22 +12,27 @@ fun bindImage(view: ImageView, imgUrl: String?) {
     Glide.with(view.context)
         .load(imgUrl)
         .into(view)
-        .apply { RequestOptions()
-            .placeholder(R.drawable.ic_broken_image)
-            .error(R.drawable.ic_error)
+        .apply {
+            RequestOptions()
+                .placeholder(R.drawable.ic_broken_image)
+                .error(R.drawable.ic_error)
         }
 }
 
 @BindingAdapter("imageUrl")
 fun loadImage(view: ImageView, url: String?) {
     url?.let {
-        val imgUri = url.toUri().buildUpon().scheme("https").build()
-        Glide.with(view.context)
-            .load(imgUri)
-            .apply { RequestOptions()
-                .placeholder(R.drawable.loading_animation)
-                .error(R.drawable.ic_error)
-            }
-            .into(view)
+        val imgUri=url.toUri().buildUpon().scheme("https").build()
+
+        if (!url.isNullOrEmpty()) {
+            Glide.with(view.context)
+                .load(imgUri)
+                .apply {
+                    RequestOptions()
+                        .placeholder(R.drawable.loading_animation)
+                        .error(R.drawable.ic_error)
+                }
+                .into(view)
+        }
     }
 }

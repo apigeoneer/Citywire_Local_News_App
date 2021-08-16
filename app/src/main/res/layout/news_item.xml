@@ -44,7 +44,7 @@
                     android:layout_gravity="center"
                     android:scaleType="centerCrop"
                     app:srcCompat="@drawable/ic_launcher_background"
-                    app:urlToImage="@{article.url}"/>
+                    app:imageUrl="@{article.url}"/>
             </androidx.cardview.widget.CardView>
 
             <LinearLayout
@@ -67,8 +67,10 @@
                     android:id="@+id/news_source"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingTop="2dp"
                     android:text="@{article.author}"
                     android:textColor="#343434"
+                    android:textSize="12sp"
                     tools:text="CNBC" />
 
                 <TextView
@@ -77,6 +79,7 @@
                     android:layout_height="wrap_content"
                     android:text="@{article.publishedAt}"
                     android:textColor="#009688"
+                    android:textSize="12sp"
                     tools:text="11/08/2022 11:43 IST" />
             </LinearLayout>
 
