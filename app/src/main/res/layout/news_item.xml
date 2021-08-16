@@ -12,9 +12,9 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:backgroundTint="#ffffff"
+        android:layout_marginStart="@dimen/margin_medium"
+        android:layout_marginEnd="@dimen/margin_medium"
+        android:backgroundTint="@color/white"
         app:cardCornerRadius="0dp"
         app:cardElevation="0dp">
 
@@ -27,15 +27,15 @@
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#e7e7e7" />
+                android:background="@color/bg"  />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_gravity="center"
-                android:layout_margin="16dp"
+                android:layout_margin="@dimen/margin_medium"
                 android:elevation="0dp"
-                app:cardCornerRadius="16dp">
+                app:cardCornerRadius="@dimen/margin_medium">
 
                 <ImageView
                     android:id="@+id/news_image_view"
@@ -44,14 +44,15 @@
                     android:layout_gravity="center"
                     android:scaleType="centerCrop"
                     app:srcCompat="@drawable/ic_launcher_background"
-                    app:imageUrl="@{article.url}"/>
+                    app:imageUrl="@{article.url}"
+                    android:contentDescription="@string/news_image" />
             </androidx.cardview.widget.CardView>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="16dp"
+                android:layout_margin="@dimen/margin_medium"
                 android:orientation="vertical">
 
                 <TextView
@@ -59,7 +60,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{article.title}"
-                    android:textColor="#343434"
+                    android:textColor="@color/dark_grey"
                     android:textStyle="bold"
                     tools:text="Fish fall from the sky" />
 
@@ -69,7 +70,7 @@
                     android:layout_height="wrap_content"
                     android:paddingTop="2dp"
                     android:text="@{article.author}"
-                    android:textColor="#343434"
+                    android:textColor="@color/dark_grey"
                     android:textSize="12sp"
                     tools:text="CNBC" />
 
@@ -86,13 +87,13 @@
             <View
                 android:layout_width="0.5dp"
                 android:layout_height="match_parent"
-                android:background="#e7e7e7" />
+                android:background="@color/bg" />
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#e7e7e7" />
+            android:background="@color/bg" />
     </androidx.cardview.widget.CardView>
 
 </layout>
