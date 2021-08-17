@@ -19,6 +19,6 @@ class SplashActivity : AppCompatActivity() {
 
             // remove the Splash Activity from the stack (since we only want to show it once i.e., at the v beginning)
             this.finish()
-        }, 1000)
+        }, 3000)
     }
 }
